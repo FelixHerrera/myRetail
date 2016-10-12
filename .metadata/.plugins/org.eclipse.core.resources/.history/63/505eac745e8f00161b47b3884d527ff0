@@ -1,0 +1,39 @@
+package com.myRetail;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
+public class TargetService {
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	private final String URL = "https://api.target.com/products/v3/{id}?fields=descriptions&id_type=TCIN&key={key}";
+	private final String KEY = "43cJWpLjH8Z8oR18KdrZDBKAgLLQKJjz";
+	
+	
+	public ProductResponse getResponse(long id){
+		System.out.println("ID = "+ id);
+		
+		ProductResponse productResponse = restTemplate.getForObject(URL, 
+				ProductResponse.class, id, KEY);
+		if(productResponse == null){
+			System.out.println("Target Service returned null");
+		}
+		else{
+			System.out.println(productResponse);
+		}
+		Items productList = productResponse.getItemDescription();
+		
+//		System.out.println("Id = " + id);
+//		if(productResponse != null){
+//			for(Product p : productList.getItemDescription()){
+//				if(p == null){
+//					System.out.println("id invalid");
+//				}
+//				System.out.println(p.getName());
+//			}
+//		}
+		
+		return productResponse;
+	}
+
+}

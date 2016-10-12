@@ -1,0 +1,50 @@
+package com.myRetail;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
+public class TargetService {
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	private final String URL = "https://api.target.com/products/v3/{id}?fields=descriptions&id_type=TCIN&key={key}";
+	private final String KEY = "43cJWpLjH8Z8oR18KdrZDBKAgLLQKJjz";
+	
+	
+	public ProductResponse getResponse(long id){
+		System.out.println("ID = "+ id);
+		System.out.println(KEY);
+		System.out.println(URL);
+		ProductResponse productResponse = new ProductResponse();
+		
+		try{
+			productResponse = restTemplate.getForObject("https://api.target.com/products/v3/15117729?fields=descriptions&id_type=TCIN&key=43cJWpLjH8Z8oR18KdrZDBKAgLLQKJjz", 
+					ProductResponse.class);
+		}
+		catch(NullPointerException e){
+			System.out.println("Rest template failed");
+		}
+//		if(productResponse == null){
+//			System.out.println("Target Service returned null");
+//		}
+//		else{
+//			System.out.println("This is product response "+ productResponse);
+//		}
+		//Items productList = productResponse.getItemDescription();
+		
+//		System.out.println("Id = " + id);
+//		if(productResponse != null){
+//			for(Product p : productList.getItemDescription()){
+//				if(p == null){
+//					System.out.println("id invalid");
+//				}
+//				System.out.println(p.getName());
+//			}
+//		}
+		
+
+		
+		return new ProductResponse();
+	}
+
+}

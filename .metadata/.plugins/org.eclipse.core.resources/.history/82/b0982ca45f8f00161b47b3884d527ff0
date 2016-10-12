@@ -1,0 +1,48 @@
+package com.myRetail;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+public class ProductController {
+	
+	public String name;
+	TargetService service = new TargetService();
+	
+	
+	
+	@RequestMapping("/products/{id}")
+	public void returnProduct(@PathVariable("id") long id){
+		String productName = "";
+		System.out.println("ID = "+ id);
+		
+//		ProductResponse productResponse = restTemplate.getForObject("https://api.target.com/products/v3/{id}?fields=descriptions&id_type=TCIN&key={key}", 
+//				ProductResponse.class, id, KEY);
+//		Items productList = productResponse.getItemDescription();
+		ProductResponse response = service.getResponse(id);
+		System.out.println("Id = " + id);
+		//System.out.println(productResponse.getItemDescription().size());
+//		System.out.println(productResponse.getItemDescription());
+//		if(service == null){
+//			System.out.println("List is null");
+//		}
+//		else{
+//			for(Product p : response.getItemDescription().getItemInfo()){
+//				if(p == null){
+//					System.out.println("id invalid");
+//				}
+//				else{
+//					System.out.println(p.getName());
+//				}
+//			}
+//		}
+		return;
+	}
+}

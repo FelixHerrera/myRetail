@@ -1,0 +1,53 @@
+package com.myRetail;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+@RequestMapping("Product")
+public class ProductController {
+	
+	public String name;
+	private final String KEY = "43cJWpLjH8Z8oR18KdrZDBKAgLLQKJjz";
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@RequestMapping(value = "/products/{id}", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody Product returnProduct(@PathVariable("id") long id){
+		Product item = new Product();
+		
+		ProductResponse productResponse = restTemplate.getForObject("https://api.target.com/products/v3/{id}?fields=descriptions&id_type=TCIN&key={key}", 
+				ProductResponse.class, id, KEY);
+		Items productList = productResponse.getItemDescription();
+		
+		System.out.println("Id = " + id);
+		//System.out.println(productResponse.getItemDescription().size());
+//		System.out.println(productResponse.getItemDescription());
+		
+		for(Product p : productList.getItemInfo()){
+			if(p == null){
+				System.out.println("id invalid");
+			}
+			p.setId(id);
+			System.out.println(p.getName() + " " + p.getId());
+			item = p;
+		}
+		
+		return item;
+	}
+	
+	@RequestMapping(value = "/products/{id}", method = RequestMethod.POST, produces = "application/json")
+	public String changePrice(long id){
+		return "";
+	}
+}

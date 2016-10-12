@@ -1,0 +1,25 @@
+package com.myRetail;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class ProductResponse {
+	@JsonProperty("product_composite_response")
+	private Items itemDescription;
+	
+	private long id = -1;
+
+	public Items getItemDescription() {
+		return itemDescription;
+	}
+
+	public void setItemDescription(Items itemDescription) {
+		this.itemDescription = itemDescription;
+	}
+
+	
+}

@@ -1,0 +1,24 @@
+package com.myRetail;
+
+import org.springframework.data.annotation.Id;
+
+public class Price {
+	
+	@Id
+	public long id;
+	
+	double price;
+	String currencyCode;
+	
+	public Price(){}
+	
+	public Price(long id, double price, String currency){
+		this.id = id;
+		this.price = price;
+		this.currencyCode = currency;
+	}
+	
+	public String toString(){
+		return "\"current_price\":{value\":" + price + ",\"currency_code\":\"" + currencyCode + "\"}";
+	}
+}

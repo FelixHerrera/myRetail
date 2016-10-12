@@ -1,0 +1,20 @@
+package com.meRetailTests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.myRetail.ProductController;
+
+public class ControllerTests {
+
+	@Test
+	public void test() {
+		System.out.println("testing);
+		ProductController pc = new ProductController();
+		String output = pc.returnProduct(15117729);
+		System.out.println(output);
+		assertEquals("{\"id\":13860428,\"name\":\"Apple iPad Air 2 Wi-Fi 16GB, Gold\",\"current_price\":{\"value\": 13.49,\"currency_code\":\"USD\"}}",output);
+	}
+
+}

@@ -1,0 +1,21 @@
+package com.myRetail;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
+
+@SpringBootApplication
+@ImportResource("org.springframework.web.client.RestTemplate")
+public class MyRetailApplication implements CommandLineRunner{
+
+	public static void main(String[] args) {
+		SpringApplication.run(MyRetailApplication.class, args);
+	}
+
+	@Override
+	public void run(String... arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+}
